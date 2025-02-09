@@ -8,11 +8,11 @@ def Create_Robot():
     x=0
     y=0
     z=0.5
-    pyrosim.Send_Cube(name='Link0', pos=[x,y,z], size=[length, width, height])
-    pyrosim.Send_Joint( name = "Link0_Link1" , parent= "Link0" , child = "Link1" , type = "revolute", position = [0.5,0,1])
-    pyrosim.Send_Cube(name='Link1', pos=[0.5,0,0.5], size=[length, width, height])
-    pyrosim.Send_Joint( name = "Link1_Link2" , parent= "Link1" , child = "Link2" , type = "revolute", position = [1,0,0])
-    pyrosim.Send_Cube(name='Link2', pos=[0.5,0,-0.5], size=[length, width, height])
+    pyrosim.Send_Cube(name='Torso', pos=[x,y,1.5], size=[length, width, height])
+    pyrosim.Send_Joint( name = "Torso_Frontleg" , parent= "Torso" , child = "Frontleg" , type = "revolute", position = [0.5,0,1])
+    pyrosim.Send_Cube(name='Frontleg', pos=[0.5,0,-.5], size=[length, width, height])
+    pyrosim.Send_Joint( name = "Torso_Backleg" , parent= "Torso" , child = "Backleg" , type = "revolute", position = [-0.5,0,1])
+    pyrosim.Send_Cube(name='Backleg', pos=[-0.5,0,-0.5], size=[length, width, height])
 
     pyrosim.End()
 
