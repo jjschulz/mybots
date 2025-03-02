@@ -1,6 +1,9 @@
 import pyrosim.pyrosim as pyrosim
 
 def Create_Robot():
+    pass
+
+def Generate_Body():
     pyrosim.Start_URDF("body.urdf")
     length=1
     width=1
@@ -16,6 +19,16 @@ def Create_Robot():
 
     pyrosim.End()
 
+
+def Generate_Brain():
+    pyrosim.Start_NeuralNetwork("brain.nndf")
+    pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
+    pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "Backleg")
+    pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "Frontleg")
+    pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_Backleg")
+    pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_Frontleg")
+
+    pyrosim.End()
 # def Create_Robot():
 #     pyrosim.Start_URDF("body.urdf")
 #     length=1
@@ -54,4 +67,5 @@ def Create_World():
     pyrosim.End()
 
 Create_World()
-Create_Robot()
+Generate_Body()
+Generate_Brain()
