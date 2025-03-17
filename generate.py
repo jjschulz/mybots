@@ -36,6 +36,8 @@ def Generate_Brain():
         for j in range(3,5):
             pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=j,weight=2*random.random()-1)
     pyrosim.End()
+
+    
 # def Create_Robot():
 #     pyrosim.Start_URDF("body.urdf")
 #     length=1

@@ -8,4 +8,6 @@ Frontleg_amplitude = np.pi/4
 Frontleg_frequency = 3
 Frontleg_phaseOffset = np.pi/3
 
+numberOfGenerations=10
+
 loopConstant = 1000
