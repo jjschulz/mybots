@@ -22,7 +22,7 @@ class HILLCLIMBER:
         self.Select()
 
     def Show_Best(self):
-        print('ok final self.parent: ', self.parent.fitness)
+        print('ok final self.parent fitness: ', self.parent.fitness)
         self.parent.Evaluate('GUI')
 
 

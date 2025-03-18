@@ -8,7 +8,7 @@ from world import WORLD
 import constants as c
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         if directOrGUI == 'DIRECT':
             self.physicsClient=p.connect(p.DIRECT)
         else:
@@ -16,7 +16,7 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         self.world = WORLD()
         p.setGravity(0,0,-9.8)
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
         self.robot.Prepare_To_Sense()
         self.robot.Prepare_To_Act()
@@ -31,8 +31,8 @@ class SIMULATION:
             time.sleep(.001)
             # print(i)
 
-    def Get_Fitness(self):
-        self.robot.Get_Fitness()
+    def Get_Fitness(self, solutionID):
+        self.robot.Get_Fitness(solutionID)
 
 
     def __del__(self):

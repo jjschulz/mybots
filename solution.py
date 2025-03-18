@@ -2,20 +2,44 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import os
 import random
+import time
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, ID):
         self.weights = 2* np.random.rand(3, 2) - 1
+        self.myID = ID
 
     def Evaluate(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
-        self.Create_Brain()
-        os.system(f"python simulate.py {directOrGUI}")
-        f=open('fitness.txt','r')
+        self.Create_Brain(self.myID)
+        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)}")
+        while not os.path.exists(f'fitness{str(self.myID)}.txt'):
+            time.sleep(0.01)
+        f=open(f'fitness{str(self.myID)}.txt','r')
         contents=f.read()
         f.close()
         self.fitness=float(contents)
+        print(f'here is my new self.fitness: {self.fitness}')
         # print('self.fitness: ',self.fitness)
+
+    def Start_Simulation(self, directOrGUI):
+        self.Create_World()
+        self.Create_Body()
+        self.Create_Brain(self.myID)
+        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)}")
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists(f'fitness{str(self.myID)}.txt'):
+            time.sleep(0.01)
+        f=open(f'fitness{str(self.myID)}.txt','r')
+        contents=f.read()
+        f.close()
+        self.fitness=float(contents)
+        # print(f'here is my new self.fitness: {self.fitness}')
+        os.system(f'del fitness{self.myID}.txt')
+
+    def Set_ID(self):
+        self.myID
 
     def Create_World(self):
         pyrosim.Start_SDF('world.sdf')
@@ -45,8 +69,8 @@ class SOLUTION:
         pyrosim.End()
 
 
-    def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+    def Create_Brain(self, id):
+        pyrosim.Start_NeuralNetwork(f"brain{id}.nndf")
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "Backleg")
         pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "Frontleg")
