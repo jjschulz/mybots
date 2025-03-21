@@ -12,7 +12,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain(self.myID)
-        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)}")
+        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)} 2>&1 &")
         while not os.path.exists(f'fitness{str(self.myID)}.txt'):
             time.sleep(0.01)
         f=open(f'fitness{str(self.myID)}.txt','r')
@@ -30,7 +30,7 @@ class SOLUTION:
 
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f'fitness{str(self.myID)}.txt'):
-            time.sleep(0.01)
+            time.sleep(0.02)
         f=open(f'fitness{str(self.myID)}.txt','r')
         contents=f.read()
         f.close()
