@@ -28,7 +28,7 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
-            time.sleep(.001)
+            time.sleep(.005)
             # print(i)
 
     def Get_Fitness(self, solutionID):
