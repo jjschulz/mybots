@@ -40,16 +40,22 @@ class PARALLEL_HILLCLIMBER:
         self.Select()
 
     def Show_Best(self):
-        # print('ok final self.parent: ', self.parent.fitness)
-        # self.parent.Evaluate('GUI')
-        lowest=100
-        lowest_parent=None
+        # lowest=100
+        # lowest_parent=None
+        # for parent in self.parents.values():
+        #     if parent.fitness < lowest:
+        #         lowest=parent.fitness
+        #         lowest_parent=parent
+        # print('ok final parent fitness: ', lowest_parent.fitness)
+        # lowest_parent.Start_Simulation('GUI')
+        highest=0
+        highest_parent=None
         for parent in self.parents.values():
-            if parent.fitness < lowest:
-                lowest=parent.fitness
-                lowest_parent=parent
-        print('ok final parent fitness: ', lowest_parent.fitness)
-        lowest_parent.Start_Simulation('GUI')
+            if parent.fitness > highest:
+                highest=parent.fitness
+                highest_parent=parent
+        print('ok final parent fitness: ', highest_parent.fitness)
+        highest_parent.Start_Simulation('GUI')
 
     def Spawn(self):
         self.children={}
@@ -69,7 +75,7 @@ class PARALLEL_HILLCLIMBER:
     def Select(self):
         #print('parent anc child fitness: ',self.parent.fitness, self.child.fitness)
         for key in self.parents.keys():
-            if self.children[key].fitness < self.parents[key].fitness:
+            if self.children[key].fitness > self.parents[key].fitness:
                 self.parents[key]=self.children[key]
         # if self.parent.fitness > self.child.fitness:
         #     self.parent=self.child

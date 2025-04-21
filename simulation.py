@@ -20,19 +20,25 @@ class SIMULATION:
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
         self.robot.Prepare_To_Sense()
         self.robot.Prepare_To_Act()
+        self.heights=[]
 
 
     def run(self):
         for i in range(c.loopConstant):
             p.stepSimulation()
+            position, orientation = p.getBasePositionAndOrientation(self.robot.robotId)
+            z_value=position[2]
+            self.heights.append(z_value)
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
             time.sleep(.005)
             # print(i)
+        self.max_height=max(self.heights)
 
     def Get_Fitness(self, solutionID):
-        self.robot.Get_Fitness(solutionID)
+        #print('here is my max height ', self.max_height)
+        self.robot.Get_Fitness(solutionID, self.max_height)
 
 
     def __del__(self):
