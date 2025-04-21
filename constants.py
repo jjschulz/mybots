@@ -8,8 +8,8 @@ Frontleg_amplitude = np.pi/4
 Frontleg_frequency = 3
 Frontleg_phaseOffset = np.pi/3
 
-numberOfGenerations = 7
-populationSize = 7
+numberOfGenerations = 8
+populationSize = 8
 
 motorJointRange = 0.5
 
