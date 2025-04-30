@@ -35,10 +35,11 @@ class SIMULATION:
             time.sleep(.005)
             # print(i)
         self.avg_height=np.mean(self.heights)
+        self.height_fitness=max(self.heights)*np.mean(self.heights)
 
     def Get_Fitness(self, solutionID):
         #print('here is my max height ', self.max_height)
-        self.robot.Get_Fitness(solutionID, self.avg_height)
+        self.robot.Get_Fitness(solutionID, self.height_fitness)
 
 
     def __del__(self):
