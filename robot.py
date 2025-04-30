@@ -47,7 +47,7 @@ class ROBOT:
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
         xCoordinateOfLinkZero = basePosition[0]
-        fitness=abs(xCoordinateOfLinkZero * avg_height)
+        fitness=abs(1/2 * xCoordinateOfLinkZero) * avg_height
         print(f'\nhere is my AVG height: {avg_height}\nhere is my x value: {xCoordinateOfLinkZero}\nhere is my overall fitness:{fitness}')
         with open(f'tmp{solutionID}.txt', 'w') as f:
             f.write(str(fitness))

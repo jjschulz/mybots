@@ -36,7 +36,7 @@ class JOINT:
         f.write('   <axis xyz="' + jointAxis + '"/>\n')
 
         Save_Whitespace(self.depth,f)
-        f.write('   <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>\n')
+        f.write('   <limit effort="100.0" lower="-3.14159" upper="3.14159" velocity="5.0"/>\n')
 
         Save_Whitespace(self.depth,f)
         f.write('</joint>' + '\n')
