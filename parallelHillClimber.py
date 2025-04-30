@@ -29,7 +29,7 @@ class PARALLEL_HILLCLIMBER:
         self.Evaluate(self.parents, 0)
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation(currentGeneration)
-        # self.Plot()
+        np.save('fitness_A_matrix', self.matrix)
         
 
     def Evolve_For_One_Generation(self, currentGeneration):
@@ -83,14 +83,3 @@ class PARALLEL_HILLCLIMBER:
                 self.parents[key]=self.children[key]
         # if self.parent.fitness > self.child.fitness:
         #     self.parent=self.child
-
-    # def Plot(self):
-    #     for i in range(c.populationSize):
-    #         plt.plot(self.matrix[i], label=f'Individual {i}')
-    #         plt.xlabel('Generation')
-    #         plt.ylabel('Fitness')
-    #         plt.title('Fitness Over Generations')
-    #         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='small')
-    #         plt.tight_layout()
-    #         plt.grid(True)
-    #         plt.show()
