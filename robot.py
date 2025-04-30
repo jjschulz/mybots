@@ -48,7 +48,7 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         xCoordinateOfLinkZero = basePosition[0]
         # fitness=abs(xCoordinateOfLinkZero * max_height)
-        fitness = abs(xCoordinateOfLinkZero*1/2)*max_height
+        fitness = abs(xCoordinateOfLinkZero)*max_height
         print(f'\nhere is my height fitness: {max_height}\nhere is my x value: {xCoordinateOfLinkZero}\nhere is my overall fitness:{fitness}')
         with open(f'tmp{solutionID}.txt', 'w') as f:
             f.write(str(fitness))
