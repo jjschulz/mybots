@@ -2,6 +2,8 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 
 class PARALLEL_HILLCLIMBER:
     def __init__(self):
@@ -12,28 +14,30 @@ class PARALLEL_HILLCLIMBER:
         for i in range(0,c.populationSize):
             self.parents[i]=SOLUTION(self.nextAvailableID)
             self.nextAvailableID+=1
-        
+        self.matrix = np.zeros((c.populationSize, c.numberOfGenerations))
 
         
-    def Evaluate(self, solutions):
+    def Evaluate(self, solutions, generation):
         for parent in solutions.values():
             parent.Start_Simulation('DIRECT')
-        for parent in solutions.values():
+        for i, parent in solutions.items():
             parent.Wait_For_Simulation_To_End()
+            self.matrix[i, generation] = parent.fitness
             # print('fitness: ', parent.fitness)
 
     def Evolve(self):
-        self.Evaluate(self.parents)
+        self.Evaluate(self.parents, 0)
         for currentGeneration in range(c.numberOfGenerations):
-            self.Evolve_For_One_Generation()
+            self.Evolve_For_One_Generation(currentGeneration)
+        # self.Plot()
         
 
-    def Evolve_For_One_Generation(self):
+    def Evolve_For_One_Generation(self, currentGeneration):
         self.Spawn()
 
         self.Mutate()
 
-        self.Evaluate(self.children)
+        self.Evaluate(self.children, currentGeneration)
         for i in self.parents.keys():
             print(f'self.child and self.parent fitness: ', self.children[i].fitness, self.parents[i].fitness)
 
@@ -79,3 +83,14 @@ class PARALLEL_HILLCLIMBER:
                 self.parents[key]=self.children[key]
         # if self.parent.fitness > self.child.fitness:
         #     self.parent=self.child
+
+    # def Plot(self):
+    #     for i in range(c.populationSize):
+    #         plt.plot(self.matrix[i], label=f'Individual {i}')
+    #         plt.xlabel('Generation')
+    #         plt.ylabel('Fitness')
+    #         plt.title('Fitness Over Generations')
+    #         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='small')
+    #         plt.tight_layout()
+    #         plt.grid(True)
+    #         plt.show()
