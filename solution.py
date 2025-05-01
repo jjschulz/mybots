@@ -16,9 +16,13 @@ class SOLUTION:
         while not os.path.exists(f'fitness{str(self.myID)}.txt'):
             time.sleep(0.01)
         f=open(f'fitness{str(self.myID)}.txt','r')
+        f2=open(f'height_A_fitness{str(self.myID)}.txt','r')
         contents=f.read()
+        contents2=f2.read()
         f.close()
+        f2.close()
         self.fitness=float(contents)
+        self.height_fitness=float(contents2)
         print(f'here is my new self.fitness: {self.fitness}')
         # print('self.fitness: ',self.fitness)
 
@@ -35,8 +39,13 @@ class SOLUTION:
         contents=f.read()
         f.close()
         self.fitness=float(contents)
+        f2=open(f'height_A_fitness{str(self.myID)}.txt','r')
+        contents2=f2.read()
+        f2.close()
+        self.height_fitness=float(contents2)
         # print(f'here is my new self.fitness: {self.fitness}')
         os.system(f'del fitness{self.myID}.txt')
+        os.system(f'del height_A_fitness{self.myID}.txt')
 
     def Set_ID(self):
         self.myID
