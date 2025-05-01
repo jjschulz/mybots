@@ -39,7 +39,7 @@ class SIMULATION:
 
     def Get_Fitness(self, solutionID):
         #print('here is my max height ', self.max_height)
-        self.robot.Get_Fitness(solutionID, self.avg_height, self. height_fitness)
+        self.robot.Get_Fitness(solutionID, self.avg_height, self.height_fitness)
 
 
     def __del__(self):
