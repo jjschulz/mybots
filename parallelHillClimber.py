@@ -30,6 +30,7 @@ class PARALLEL_HILLCLIMBER:
         self.Evaluate(self.parents, 0)
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation(currentGeneration)
+        print(self.matrix)
         np.save('fitness_A_matrix', self.matrix)
         
 
