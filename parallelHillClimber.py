@@ -9,6 +9,7 @@ class PARALLEL_HILLCLIMBER:
     def __init__(self):
         os.system('del brain*.nndf')
         os.system('del fitness*.txt')
+        os.system('del height_A_fitness*.txt')
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(0,c.populationSize):
@@ -22,8 +23,8 @@ class PARALLEL_HILLCLIMBER:
             parent.Start_Simulation('DIRECT')
         for i, parent in solutions.items():
             parent.Wait_For_Simulation_To_End()
-            self.matrix[i, generation] = parent.fitness
-            # print('fitness: ', parent.fitness)
+            self.matrix[i, generation] = parent.height_fitness
+            print('height fitness: ', parent.height_fitness)
 
     def Evolve(self):
         self.Evaluate(self.parents, 0)

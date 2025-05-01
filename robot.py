@@ -40,7 +40,7 @@ class ROBOT:
         self.nn.Update()
         #self.nn.Print()
 
-    def Get_Fitness(self,solutionID, max_height):
+    def Get_Fitness(self,solutionID, max_height, height_fitness):
         # stateOfLinkZero=p.getLinkState(self.robotId,0)
         # positionOfLinkZero = stateOfLinkZero[0]
         # xCoordinateOfLinkZero= positionOfLinkZero[0]
@@ -48,11 +48,16 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         xCoordinateOfLinkZero = basePosition[0]
         # fitness=abs(xCoordinateOfLinkZero * max_height)
-        fitness = abs(xCoordinateOfLinkZero)*max_height
-        print(f'\nhere is my height fitness: {max_height}\nhere is my x value: {xCoordinateOfLinkZero}\nhere is my overall fitness:{fitness}')
+        fitness = abs(xCoordinateOfLinkZero* 1/2)*max_height
+        height_fit = abs(xCoordinateOfLinkZero* 1/2)*height_fitness
+        print(f'\nhere is my max height: {max_height}\nhere is my x value: {xCoordinateOfLinkZero}\nhere is my overall fitness:{fitness}')
         with open(f'tmp{solutionID}.txt', 'w') as f:
             f.write(str(fitness))
 
+        with open(f'temp{solutionID}.txt', 'w') as f:
+            f.write(str(height_fit))
+
         os.rename("tmp"+str(solutionID)+".txt" , "fitness"+str(solutionID)+".txt")
+        os.rename("temp"+str(solutionID)+".txt" , "height_A_fitness"+str(solutionID)+".txt")
 
         
