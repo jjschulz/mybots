@@ -31,7 +31,7 @@ class PARALLEL_HILLCLIMBER:
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation(currentGeneration)
         print(self.matrix)
-        np.save('fitness_A_matrix', self.matrix)
+        np.save('fitness_B_matrix', self.matrix)
         
 
     def Evolve_For_One_Generation(self, currentGeneration):
